@@ -50,3 +50,14 @@ a random local port and checks `/` and `/api/hello`. It uses a placeholder key,
 requires no real model request, and isolates data with `LAB5_DATA_DIR`. The
 service stops and temporary data is removed after the check. CI runs the same
 script after the coverage tests.
+
+## Local runner stage
+
+CI currently runs on the user's Mac through a self-hosted runner, only for pushes
+to `main`; pull request jobs are skipped during this local stage. Jobs use the
+runner's `_work` checkout, not the development folder. The workflow creates an
+independent `.venv` using
+`/Users/carrie/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3`,
+then runs the same dependency installation, coverage tests, and smoke test.
+Earlier cloud runs remain preserved in the Actions history. After collecting
+the local run evidence, stop the foreground runner with Ctrl+C.
