@@ -38,3 +38,15 @@ the alternative key, and mocks the model HTTP request with a fixed reply.
 Each test sets `LAB5_DATA_DIR` to pytest's temporary directory before importing
 or reloading the app, so writes never reach the default chat history. Coverage
 measures the full `app.py`; the command fails below 70%.
+
+## Smoke test
+
+```sh
+.venv/bin/python scripts/smoke_test.py
+```
+
+Unlike Flask `test_client`, this check starts a real temporary HTTP service on
+a random local port and checks `/` and `/api/hello`. It uses a placeholder key,
+requires no real model request, and isolates data with `LAB5_DATA_DIR`. The
+service stops and temporary data is removed after the check. CI runs the same
+script after the coverage tests.
