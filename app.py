@@ -128,7 +128,7 @@ def delete_message(id):
         record = next((item for item in messages if item["id"] == id), None)
         if record is None:
             return jsonify(error="聊天记录不存在"), 404
-        save_messages([item for item in messages if item["id"] != id])
+        save_messages(messages)
     return jsonify(message="已删除聊天记录")
 
 
